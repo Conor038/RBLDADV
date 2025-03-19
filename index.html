@@ -7,126 +7,149 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #F5F5DC; /* Tan */
-            color: #2F4F2F; /* Forest Green */
             margin: 0;
             padding: 0;
-        }
-        header {
-            position: relative;
-            background-color: #2F4F2F;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            font-size: 1.8em;
-            font-weight: bold;
+            background-color: #87CEEB; /* Sky blue default */
             overflow: hidden;
         }
-        .header-graphics {
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB, #FFD700);
+            transition: background 1s ease;
+        }
+        .sun, .moon {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: all 1s linear;
+        }
+        .sun { background-color: yellow; }
+        .moon { background-color: #F5F5DC; display: none; }
+        .ground {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 100px;
-            background: url('https://i.imgur.com/w1Wf02U.png') repeat-x bottom;
+            height: 200px;
+            background: repeating-linear-gradient(
+                90deg,
+                #228B22 0px, #228B22 10px,
+                #006400 10px, #006400 20px
+            );
         }
-        .sun-moon {
+        .mountains {
             position: absolute;
-            top: 20px;
-            right: 50px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: yellow;
-            transition: background-color 1s ease;
+            bottom: 200px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: repeating-linear-gradient(
+                45deg,
+                #3B5323 0px, #3B5323 20px,
+                transparent 20px, transparent 40px
+            );
         }
-        @media (prefers-color-scheme: dark) {
-            .sun-moon {
-                background-color: #F5F5DC; /* Moon */
-            }
+        .trees {
+            position: absolute;
+            bottom: 200px;
+            left: 10%;
+            width: 10px;
+            height: 30px;
+            background-color: #006400;
+            box-shadow: 50px 0 #006400, 100px 0 #006400, 150px 0 #006400;
+        }
+        .truck {
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            background-color: red;
+            bottom: 160px;
+            left: -60px;
+            animation: drive 10s linear infinite;
+        }
+        .truck::before, .truck::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            bottom: -5px;
+        }
+        .truck::before { left: 5px; }
+        .truck::after { right: 5px; }
+        .headlight {
+            position: absolute;
+            width: 20px;
+            height: 5px;
+            background-color: yellow;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        @keyframes drive {
+            from { left: -60px; }
+            to { left: 100%; }
         }
         nav {
-            display: flex;
-            justify-content: center;
-            background-color: #1E1E1E; /* Black */
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
         }
         nav a {
-            color: #F5F5DC; /* Off White */
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: color 0.3s ease, transform 0.2s;
-        }
-        nav a:hover {
-            color: #D2B48C; /* Lighter Tan */
-            transform: scale(1.1);
-        }
-        .container {
-            padding: 60px;
-            text-align: center;
-            background-color: #FFF8E1; /* Off White */
-            border-radius: 10px;
-            margin: 40px auto;
-            width: 80%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .button {
-            background-color: #3A5A40; /* Dark Green */
             color: white;
-            padding: 12px 24px;
             text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s, transform 0.2s;
-            display: inline-block;
-            margin: 15px;
-            font-size: 1.1em;
+            margin: 0 15px;
             font-weight: bold;
-        }
-        .button:hover {
-            background-color: #2F4F2F;
-            transform: translateY(-3px);
-        }
-        footer {
-            background-color: #1E1E1E;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
         }
     </style>
+    <script>
+        function updateScene() {
+            let date = new Date();
+            let hours = date.getUTCHours() - 8; // Adjusting to PST
+            if (hours < 0) hours += 24;
+            let sun = document.querySelector('.sun');
+            let moon = document.querySelector('.moon');
+            let sky = document.querySelector('.sky');
+            let headlights = document.querySelectorAll('.headlight');
+            let sunY = Math.sin((hours / 24) * Math.PI) * 40 + 10;
+            let sunX = (hours / 24) * 100;
+            let moonY = Math.sin(((hours + 12) / 24) * Math.PI) * 40 + 10;
+            let moonX = ((hours + 12) / 24) * 100;
+            sun.style.top = sunY + '%';
+            sun.style.left = sunX + '%';
+            moon.style.top = moonY + '%';
+            moon.style.left = moonX + '%';
+            sky.style.background = hours > 6 && hours < 18 ? 'linear-gradient(to bottom, #87CEEB, #FFD700)' : 'linear-gradient(to bottom, #001F3F, #4B0082)';
+            moon.style.display = hours > 18 || hours < 6 ? 'block' : 'none';
+            headlights.forEach(light => light.style.opacity = (hours > 18 || hours < 6) ? 1 : 0);
+        }
+        setInterval(updateScene, 1000);
+    </script>
 </head>
 <body>
-    <header>
-        <h1>Rebuilding Adventure</h1>
-        <p>From Loss to the Ultimate Road Trip</p>
-        <div class="header-graphics"></div>
-        <div class="sun-moon"></div>
-    </header>
+    <div class="sky"></div>
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="ground"></div>
+    <div class="mountains"></div>
+    <div class="trees"></div>
+    <div class="truck"><div class="headlight"></div></div>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="story.html">The Story</a>
+        <a href="story.html">Our Story</a>
         <a href="sponsors.html">Sponsors</a>
         <a href="journey.html">Follow the Journey</a>
         <a href="getinvolved.html">Get Involved</a>
     </nav>
-    
-    <div class="container">
-        <h2>Welcome to Rebuilding Adventure</h2>
-        <p>Join us as we rebuild, explore, and seek new adventures.</p>
-        <a href="story.html" class="button">Read Our Story</a>
-        <a href="sponsors.html" class="button">Meet Our Sponsors</a>
-        <a href="journey.html" class="button">Follow the Journey</a>
-        <a href="getinvolved.html" class="button">Get Involved</a>
-    </div>
-    
-    <footer>
-        <p>&copy; 2025 Rebuilding Adventure. All rights reserved.</p>
-    </footer>
 </body>
 </html>
