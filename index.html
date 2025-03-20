@@ -87,53 +87,48 @@
             from { transform: translateY(0px); }
             to { transform: translateY(3px); }
         }
-        .dust-trail {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: rgba(139, 69, 19, 0.6);
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: dustTrail 1s linear infinite;
-        }
-        @keyframes dustTrail {
-            0% { transform: translateY(0) scale(1); opacity: 0.8; }
-            100% { transform: translateY(-15px) scale(1.5); opacity: 0; }
-        }
         .truck {
             position: absolute;
-            width: 90px;
-            height: 45px;
-            background: linear-gradient(to right, #FF5733, #C70039);
+            width: 100px;
+            height: 50px;
+            background: linear-gradient(to right, #555, #333);
             bottom: 130px;
-            border-radius: 10px;
+            clip-path: polygon(5% 75%, 5% 25%, 20% 10%, 80% 10%, 95% 25%, 95% 75%, 5% 75%);
             animation: drivePattern 10s linear infinite alternate;
+        }
+        .truck .push-bar {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background: #222;
+            top: 15px;
+            left: -10px;
         }
         .truck .cab {
             position: absolute;
-            width: 50px;
-            height: 30px;
-            background: linear-gradient(to right, #FFC300, #FF5733);
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(to right, #888, #555);
             top: -10px;
-            left: 5px;
-            border-radius: 10px 10px 0 0;
+            left: 10px;
+            border-radius: 5px 5px 0 0;
         }
         .truck .bed {
             position: absolute;
-            width: 40px;
-            height: 25px;
-            background: #900C3F;
-            top: 5px;
-            left: 50px;
-            border-radius: 0 0 10px 10px;
+            width: 45px;
+            height: 20px;
+            background: #444;
+            top: 10px;
+            left: 45px;
+            border-radius: 0 0 5px 5px;
         }
         .truck .wheel {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             background: radial-gradient(circle, #222 40%, #555 60%);
             border-radius: 50%;
-            bottom: -10px;
+            bottom: -12px;
             animation: spinWheels 0.3s linear infinite;
         }
         .truck .wheel.left { left: 10px; }
@@ -187,12 +182,12 @@
     <div class="snow-capped"></div>
     <div class="river"></div>
     <div class="truck">
+        <div class="push-bar"></div>
         <div class="cab"></div>
         <div class="bed"></div>
         <div class="wheel left"></div>
         <div class="wheel right"></div>
         <div class="headlight"></div>
-        <div class="dust-trail"></div>
     </div>
     <nav>
         <a href="story.html">Our Story</a>
