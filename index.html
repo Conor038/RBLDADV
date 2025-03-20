@@ -52,7 +52,12 @@
             left: 0;
             width: 100%;
             height: 200px;
-            background: repeating-linear-gradient(45deg, #8B4513, #654321 10px, #3E2723 20px);
+            background: repeating-linear-gradient(
+                0deg, 
+                #654321 0px, #654321 10px, 
+                #3E2723 10px, #3E2723 20px, 
+                #8B4513 20px, #8B4513 30px
+            );
             image-rendering: pixelated;
         }
         nav {
@@ -74,42 +79,6 @@
             font-size: 1.2em;
         }
     </style>
-    <script>
-        function updateTime() {
-            let now = new Date();
-            let pstOffset = -8;
-            let utc = now.getTime() + now.getTimezoneOffset() * 60000;
-            let pstTime = new Date(utc + (3600000 * pstOffset));
-            let hours = pstTime.getHours();
-            let sun = document.querySelector('.sun');
-            let moon = document.querySelector('.moon');
-            let sky = document.querySelector('.sky');
-            
-            let sunPositionX = ((hours - 6) / 12) * 100;
-            let sunPositionY = Math.sin((hours - 6) / 12 * Math.PI) * 50 + 50;
-            
-            sun.style.left = `${Math.min(Math.max(sunPositionX, 0), 100)}%`;
-            sun.style.top = `${100 - sunPositionY}%`;
-            
-            let moonPositionX = ((hours - 18) / 12) * 100;
-            let moonPositionY = Math.sin((hours - 18) / 12 * Math.PI) * 50 + 50;
-            
-            moon.style.left = `${Math.min(Math.max(moonPositionX, 0), 100)}%`;
-            moon.style.top = `${100 - moonPositionY}%`;
-            
-            if (hours >= 6 && hours < 18) {
-                sun.style.display = 'block';
-                moon.style.display = 'none';
-                sky.style.background = 'linear-gradient(to bottom, #87CEEB, #FFD700)';
-            } else {
-                sun.style.display = 'none';
-                moon.style.display = 'block';
-                sky.style.background = 'linear-gradient(to bottom, #1E3A8A, #000)';
-            }
-        }
-        setInterval(updateTime, 1000);
-        window.onload = updateTime;
-    </script>
 </head>
 <body>
     <nav>
