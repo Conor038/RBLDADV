@@ -26,20 +26,20 @@
             position: absolute;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 0;
             transition: all 2s linear;
             image-rendering: pixelated;
         }
-        .sun { background-color: yellow; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
-        .moon { background-color: #F5F5DC; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); display: none; }
+        .sun { background-color: yellow; box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); }
+        .moon { background-color: #F5F5DC; box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); display: none; }
         .cloud {
             position: absolute;
-            width: 80px;
-            height: 30px;
+            width: 60px;
+            height: 20px;
             background: white;
-            border-radius: 5px;
+            border-radius: 0;
             opacity: 0.8;
-            animation: moveClouds 90s linear infinite;
+            animation: moveClouds 120s linear infinite;
             image-rendering: pixelated;
         }
         @keyframes moveClouds {
@@ -52,7 +52,7 @@
             left: 0;
             width: 100%;
             height: 200px;
-            background: radial-gradient(circle at 50% 100%, #8B4513, #654321, #3E2723);
+            background: repeating-linear-gradient(45deg, #8B4513, #654321 10px, #3E2723 20px);
             image-rendering: pixelated;
         }
         nav {
@@ -77,7 +77,10 @@
     <script>
         function updateTime() {
             let now = new Date();
-            let hours = now.getHours();
+            let pstOffset = -8;
+            let utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            let pstTime = new Date(utc + (3600000 * pstOffset));
+            let hours = pstTime.getHours();
             let sun = document.querySelector('.sun');
             let moon = document.querySelector('.moon');
             let sky = document.querySelector('.sky');
@@ -119,11 +122,11 @@
     <div class="sky"></div>
     <div class="sun"></div>
     <div class="moon"></div>
-    <div class="cloud" style="top: 40px; left: 85%;"></div>
-    <div class="cloud" style="top: 120px; left: 50%;"></div>
-    <div class="cloud" style="top: 180px; left: 75%;"></div>
-    <div class="cloud" style="top: 60px; left: 15%;"></div>
-    <div class="cloud" style="top: 150px; left: 35%;"></div>
+    <div class="cloud" style="top: 40px; left: 85%; animation-duration: 100s;"></div>
+    <div class="cloud" style="top: 130px; left: 55%; animation-duration: 140s;"></div>
+    <div class="cloud" style="top: 200px; left: 75%; animation-duration: 160s;"></div>
+    <div class="cloud" style="top: 80px; left: 20%; animation-duration: 180s;"></div>
+    <div class="cloud" style="top: 170px; left: 35%; animation-duration: 120s;"></div>
     <div class="ground"></div>
 </body>
 </html>
