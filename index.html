@@ -11,6 +11,7 @@
             padding: 0;
             background-color: #87CEEB;
             overflow: hidden;
+            image-rendering: pixelated;
         }
         .sky {
             position: absolute;
@@ -19,6 +20,7 @@
             width: 100%;
             height: 100vh;
             transition: background 2s ease;
+            image-rendering: pixelated;
         }
         .sun, .moon {
             position: absolute;
@@ -26,6 +28,7 @@
             height: 50px;
             border-radius: 50%;
             transition: all 2s linear;
+            image-rendering: pixelated;
         }
         .sun { background-color: yellow; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
         .moon { background-color: #F5F5DC; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); display: none; }
@@ -34,27 +37,10 @@
             width: 100px;
             height: 40px;
             background: white;
-            border-radius: 50px;
+            border-radius: 5px;
             opacity: 0.8;
             animation: moveClouds 30s linear infinite;
-        }
-        .cloud::before, .cloud::after {
-            content: '';
-            position: absolute;
-            background: white;
-            border-radius: 50px;
-        }
-        .cloud::before {
-            width: 60px;
-            height: 60px;
-            top: -30px;
-            left: 10px;
-        }
-        .cloud::after {
-            width: 80px;
-            height: 80px;
-            top: -40px;
-            left: 40px;
+            image-rendering: pixelated;
         }
         @keyframes moveClouds {
             from { left: 100%; }
@@ -67,6 +53,7 @@
             width: 100%;
             height: 200px;
             background: radial-gradient(circle at 50% 100%, #8B4513, #654321, #3E2723);
+            image-rendering: pixelated;
         }
         nav {
             position: fixed;
@@ -77,6 +64,7 @@
             padding: 15px 0;
             text-align: center;
             z-index: 1000;
+            image-rendering: pixelated;
         }
         nav a {
             color: white;
@@ -99,6 +87,9 @@
             let sun = document.querySelector('.sun');
             let moon = document.querySelector('.moon');
             let sky = document.querySelector('.sky');
+            
+            let sunPosition = ((hours - 6) / 12) * 100;
+            sun.style.top = `${Math.min(Math.max(sunPosition, 0), 100)}%`;
             
             if (hours >= 6 && hours < 18) {
                 sun.style.display = 'block';
@@ -123,11 +114,13 @@
         <a href="getinvolved.html">Get Involved</a>
     </nav>
     <div class="sky"></div>
-    <div class="sun"></div>
-    <div class="moon"></div>
+    <div class="sun" style="left: 50%;"></div>
+    <div class="moon" style="left: 50%;"></div>
     <div class="cloud" style="top: 50px; left: 80%;"></div>
     <div class="cloud" style="top: 120px; left: 60%;"></div>
     <div class="cloud" style="top: 180px; left: 90%;"></div>
+    <div class="cloud" style="top: 220px; left: 30%;"></div>
+    <div class="cloud" style="top: 70px; left: 10%;"></div>
     <div class="ground"></div>
 </body>
 </html>
