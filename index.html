@@ -18,7 +18,6 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(to bottom, #87CEEB, #FFD700);
             transition: background 2s ease;
         }
         .sun, .moon {
@@ -30,6 +29,37 @@
         }
         .sun { background-color: yellow; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
         .moon { background-color: #F5F5DC; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); display: none; }
+        .cloud {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.8;
+            animation: moveClouds 30s linear infinite;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50px;
+        }
+        .cloud::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 10px;
+        }
+        .cloud::after {
+            width: 80px;
+            height: 80px;
+            top: -40px;
+            left: 40px;
+        }
+        @keyframes moveClouds {
+            from { left: 100%; }
+            to { left: -200px; }
+        }
         .ground {
             position: absolute;
             bottom: 0;
@@ -55,68 +85,34 @@
             font-weight: bold;
             font-size: 1.2em;
         }
-        .truck {
-            position: absolute;
-            width: 80px;
-            height: 40px;
-            background: #444;
-            bottom: 130px;
-            left: 0;
-            image-rendering: pixelated;
-            animation: drivePattern 10s linear infinite;
+        @keyframes updateSky {
+            0% { background: linear-gradient(to bottom, #1E3A8A, #87CEEB); }
+            50% { background: linear-gradient(to bottom, #87CEEB, #FFD700); }
+            100% { background: linear-gradient(to bottom, #1E3A8A, #87CEEB); }
         }
-        .truck .push-bar {
-            position: absolute;
-            width: 10px;
-            height: 5px;
-            background: #222;
-            top: 8px;
-            left: -5px;
-        }
-        .truck .cab {
-            position: absolute;
-            width: 30px;
-            height: 20px;
-            background: #666;
-            top: -10px;
-            left: 10px;
-        }
-        .truck .window {
-            position: absolute;
-            width: 15px;
-            height: 10px;
-            background: lightblue;
-            top: 3px;
-            left: 8px;
-        }
-        .truck .bed {
-            position: absolute;
-            width: 40px;
-            height: 15px;
-            background: #333;
-            top: 5px;
-            left: 40px;
-        }
-        .truck .wheel {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #222;
-            border-radius: 50%;
-            bottom: -8px;
-            animation: spinWheels 0.3s linear infinite;
-        }
-        .truck .wheel.left { left: 5px; }
-        .truck .wheel.right { right: 5px; }
-        @keyframes spinWheels {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes drivePattern {
-            0% { left: 100%; }
-            100% { left: 0%; }
-        }
+        .sky { animation: updateSky 24s linear infinite; }
     </style>
+    <script>
+        function updateTime() {
+            let now = new Date();
+            let hours = now.getHours();
+            let sun = document.querySelector('.sun');
+            let moon = document.querySelector('.moon');
+            let sky = document.querySelector('.sky');
+            
+            if (hours >= 6 && hours < 18) {
+                sun.style.display = 'block';
+                moon.style.display = 'none';
+                sky.style.background = 'linear-gradient(to bottom, #87CEEB, #FFD700)';
+            } else {
+                sun.style.display = 'none';
+                moon.style.display = 'block';
+                sky.style.background = 'linear-gradient(to bottom, #1E3A8A, #000)';
+            }
+        }
+        setInterval(updateTime, 1000);
+        window.onload = updateTime;
+    </script>
 </head>
 <body>
     <nav>
@@ -129,15 +125,9 @@
     <div class="sky"></div>
     <div class="sun"></div>
     <div class="moon"></div>
+    <div class="cloud" style="top: 50px; left: 80%;"></div>
+    <div class="cloud" style="top: 120px; left: 60%;"></div>
+    <div class="cloud" style="top: 180px; left: 90%;"></div>
     <div class="ground"></div>
-    <div class="truck">
-        <div class="push-bar"></div>
-        <div class="cab">
-            <div class="window"></div>
-        </div>
-        <div class="bed"></div>
-        <div class="wheel left"></div>
-        <div class="wheel right"></div>
-    </div>
 </body>
 </html>
