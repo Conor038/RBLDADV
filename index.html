@@ -40,11 +40,12 @@
         }
         .truck {
             position: absolute;
-            width: 120px;
-            height: 50px;
-            background: linear-gradient(to right, #555, #333);
+            width: 140px;
+            height: 60px;
+            background: linear-gradient(to right, #444, #222);
             bottom: 130px;
             left: 0;
+            border-radius: 5px;
             animation: drivePattern 10s linear infinite alternate;
         }
         .truck .push-bar {
@@ -52,38 +53,47 @@
             width: 20px;
             height: 10px;
             background: #222;
-            top: 15px;
+            top: 20px;
             left: -10px;
         }
         .truck .cab {
             position: absolute;
-            width: 40px;
-            height: 25px;
-            background: linear-gradient(to right, #888, #555);
-            top: -10px;
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(to right, #666, #444);
+            top: -15px;
+            left: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+        .truck .window {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: lightblue;
+            top: 5px;
             left: 10px;
-            border-radius: 5px 5px 0 0;
+            border-radius: 4px;
         }
         .truck .bed {
             position: absolute;
-            width: 60px;
-            height: 20px;
-            background: #444;
+            width: 70px;
+            height: 25px;
+            background: #333;
             top: 10px;
-            left: 50px;
+            left: 60px;
             border-radius: 0 0 5px 5px;
         }
         .truck .wheel {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             background: radial-gradient(circle, #222 40%, #555 60%);
             border-radius: 50%;
-            bottom: -15px;
+            bottom: -18px;
             animation: spinWheels 0.3s linear infinite;
         }
-        .truck .wheel.left { left: 10px; }
-        .truck .wheel.right { right: 10px; }
+        .truck .wheel.left { left: 15px; }
+        .truck .wheel.right { right: 15px; }
         @keyframes spinWheels {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -101,7 +111,9 @@
     <div class="ground"></div>
     <div class="truck">
         <div class="push-bar"></div>
-        <div class="cab"></div>
+        <div class="cab">
+            <div class="window"></div>
+        </div>
         <div class="bed"></div>
         <div class="wheel left"></div>
         <div class="wheel right"></div>
