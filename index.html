@@ -40,68 +40,64 @@
         }
         .truck {
             position: absolute;
-            width: 160px;
-            height: 60px;
-            background: linear-gradient(to right, #444, #222);
+            width: 80px;
+            height: 40px;
+            background: #444;
             bottom: 130px;
             left: 0;
-            border-radius: 5px;
-            animation: drivePattern 10s linear infinite alternate;
+            image-rendering: pixelated;
+            animation: drivePattern 10s linear infinite;
         }
         .truck .push-bar {
             position: absolute;
-            width: 25px;
-            height: 12px;
+            width: 10px;
+            height: 5px;
             background: #222;
-            top: 18px;
-            left: -15px;
-            border-radius: 3px;
+            top: 8px;
+            left: -5px;
         }
         .truck .cab {
             position: absolute;
-            width: 55px;
-            height: 40px;
-            background: linear-gradient(to right, #666, #444);
+            width: 30px;
+            height: 20px;
+            background: #666;
             top: -10px;
-            left: 15px;
-            border-radius: 10px 10px 0 0;
+            left: 10px;
         }
         .truck .window {
             position: absolute;
-            width: 35px;
-            height: 25px;
+            width: 15px;
+            height: 10px;
             background: lightblue;
-            top: 5px;
-            left: 10px;
-            border-radius: 5px;
+            top: 3px;
+            left: 8px;
         }
         .truck .bed {
             position: absolute;
-            width: 80px;
-            height: 30px;
+            width: 40px;
+            height: 15px;
             background: #333;
-            top: 8px;
-            left: 65px;
-            border-radius: 2px;
+            top: 5px;
+            left: 40px;
         }
         .truck .wheel {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, #222 40%, #555 60%);
+            width: 15px;
+            height: 15px;
+            background: #222;
             border-radius: 50%;
-            bottom: -20px;
+            bottom: -8px;
             animation: spinWheels 0.3s linear infinite;
         }
-        .truck .wheel.left { left: 20px; }
-        .truck .wheel.right { right: 20px; }
+        .truck .wheel.left { left: 5px; }
+        .truck .wheel.right { right: 5px; }
         @keyframes spinWheels {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         @keyframes drivePattern {
-            0% { left: 0%; bottom: 130px; }
-            100% { left: 100%; bottom: 130px; }
+            0% { left: 0%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
