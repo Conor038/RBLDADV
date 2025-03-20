@@ -76,56 +76,73 @@
             from { transform: translateY(0px); }
             to { transform: translateY(3px); }
         }
+        .dust-trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(139, 69, 19, 0.6);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: dustTrail 1s linear infinite;
+        }
+        @keyframes dustTrail {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-10px) scale(1.5); opacity: 0; }
+        }
         .truck {
             position: absolute;
-            width: 70px;
-            height: 40px;
-            background: linear-gradient(to right, #4E342E, #3E2723);
+            width: 75px;
+            height: 35px;
+            background: linear-gradient(to right, #FF5733, #C70039);
             bottom: 130px;
-            clip-path: polygon(0% 80%, 10% 60%, 75% 60%, 90% 80%, 100% 80%, 100% 100%, 0% 100%);
-            animation: drivePattern 12s linear infinite;
+            border-radius: 8px;
+            animation: drivePattern 10s linear infinite alternate;
         }
-        .truck::before, .truck::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: black;
-            border-radius: 50%;
-            bottom: -5px;
-        }
-        .truck::before { left: 8px; }
-        .truck::after { right: 8px; }
         .truck .cab {
             position: absolute;
-            width: 30px;
-            height: 20px;
-            background: linear-gradient(to right, #5D4037, #4E342E);
-            top: -15px;
-            left: 10px;
-            clip-path: polygon(0% 100%, 0% 40%, 10% 20%, 70% 20%, 90% 40%, 90% 100%);
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(to right, #FFC300, #FF5733);
+            top: -10px;
+            left: 5px;
+            border-radius: 8px 8px 0 0;
         }
         .truck .bed {
             position: absolute;
             width: 35px;
-            height: 15px;
-            background: #3E2723;
-            top: -5px;
-            left: 35px;
+            height: 20px;
+            background: #900C3F;
+            top: 0px;
+            left: 40px;
+            border-radius: 0 0 8px 8px;
+        }
+        .truck .wheel {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: black;
+            border-radius: 50%;
+            bottom: -7px;
+            animation: spinWheels 0.3s linear infinite;
+        }
+        .truck .wheel.left { left: 8px; }
+        .truck .wheel.right { right: 8px; }
+        @keyframes spinWheels {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         @keyframes drivePattern {
             0% { left: 0%; bottom: 130px; }
-            15% { left: 20%; bottom: 140px; }
-            30% { left: 40%; bottom: 120px; }
-            45% { left: 55%; bottom: 150px; }
-            60% { left: 70%; bottom: 130px; }
-            80% { left: 85%; bottom: 110px; }
+            20% { left: 20%; bottom: 150px; }
+            40% { left: 40%; bottom: 110px; }
+            60% { left: 60%; bottom: 160px; }
+            80% { left: 80%; bottom: 100px; }
             100% { left: 100%; bottom: 130px; }
         }
         .headlight {
             position: absolute;
-            width: 20px;
-            height: 6px;
+            width: 25px;
+            height: 8px;
             background-color: yellow;
             opacity: 0;
             transition: opacity 1s ease;
@@ -160,7 +177,10 @@
     <div class="truck">
         <div class="cab"></div>
         <div class="bed"></div>
+        <div class="wheel left"></div>
+        <div class="wheel right"></div>
         <div class="headlight"></div>
+        <div class="dust-trail"></div>
     </div>
     <nav>
         <a href="story.html">Our Story</a>
