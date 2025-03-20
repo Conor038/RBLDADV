@@ -39,11 +39,11 @@
             background: white;
             border-radius: 5px;
             opacity: 0.8;
-            animation: moveClouds 30s linear infinite;
+            animation: moveClouds 60s linear infinite;
             image-rendering: pixelated;
         }
         @keyframes moveClouds {
-            from { left: 100%; }
+            from { left: 110%; }
             to { left: -200px; }
         }
         .ground {
@@ -73,12 +73,6 @@
             font-weight: bold;
             font-size: 1.2em;
         }
-        @keyframes updateSky {
-            0% { background: linear-gradient(to bottom, #1E3A8A, #87CEEB); }
-            50% { background: linear-gradient(to bottom, #87CEEB, #FFD700); }
-            100% { background: linear-gradient(to bottom, #1E3A8A, #87CEEB); }
-        }
-        .sky { animation: updateSky 24s linear infinite; }
     </style>
     <script>
         function updateTime() {
@@ -88,8 +82,17 @@
             let moon = document.querySelector('.moon');
             let sky = document.querySelector('.sky');
             
-            let sunPosition = ((hours - 6) / 12) * 100;
-            sun.style.top = `${Math.min(Math.max(sunPosition, 0), 100)}%`;
+            let sunPositionX = ((hours - 6) / 12) * 100;
+            let sunPositionY = Math.sin((hours - 6) / 12 * Math.PI) * 50 + 50;
+            
+            sun.style.left = `${Math.min(Math.max(sunPositionX, 0), 100)}%`;
+            sun.style.top = `${100 - sunPositionY}%`;
+            
+            let moonPositionX = ((hours - 18) / 12) * 100;
+            let moonPositionY = Math.sin((hours - 18) / 12 * Math.PI) * 50 + 50;
+            
+            moon.style.left = `${Math.min(Math.max(moonPositionX, 0), 100)}%`;
+            moon.style.top = `${100 - moonPositionY}%`;
             
             if (hours >= 6 && hours < 18) {
                 sun.style.display = 'block';
@@ -114,13 +117,13 @@
         <a href="getinvolved.html">Get Involved</a>
     </nav>
     <div class="sky"></div>
-    <div class="sun" style="left: 50%;"></div>
-    <div class="moon" style="left: 50%;"></div>
+    <div class="sun"></div>
+    <div class="moon"></div>
     <div class="cloud" style="top: 50px; left: 80%;"></div>
-    <div class="cloud" style="top: 120px; left: 60%;"></div>
-    <div class="cloud" style="top: 180px; left: 90%;"></div>
-    <div class="cloud" style="top: 220px; left: 30%;"></div>
-    <div class="cloud" style="top: 70px; left: 10%;"></div>
+    <div class="cloud" style="top: 140px; left: 40%;"></div>
+    <div class="cloud" style="top: 200px; left: 70%;"></div>
+    <div class="cloud" style="top: 90px; left: 10%;"></div>
+    <div class="cloud" style="top: 170px; left: 30%;"></div>
     <div class="ground"></div>
 </body>
 </html>
