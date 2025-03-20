@@ -20,27 +20,24 @@
             width: 100%;
             height: 100vh;
             transition: background 2s ease;
-            image-rendering: pixelated;
         }
         .sun, .moon {
             position: absolute;
             width: 50px;
             height: 50px;
-            border-radius: 0;
+            border-radius: 50%;
             transition: all 2s linear;
-            image-rendering: pixelated;
         }
-        .sun { background-color: yellow; box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); }
-        .moon { background-color: #F5F5DC; box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); display: none; }
+        .sun { background-color: yellow; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
+        .moon { background-color: #F5F5DC; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); display: none; }
         .cloud {
             position: absolute;
-            width: 60px;
-            height: 20px;
+            width: 80px;
+            height: 30px;
             background: white;
-            border-radius: 0;
+            border-radius: 10px;
             opacity: 0.8;
-            animation: moveClouds 120s linear infinite;
-            image-rendering: pixelated;
+            animation: moveClouds 90s linear infinite;
         }
         @keyframes moveClouds {
             from { left: 110%; }
@@ -52,13 +49,7 @@
             left: 0;
             width: 100%;
             height: 200px;
-            background: repeating-linear-gradient(
-                0deg, 
-                #654321 0px, #654321 10px, 
-                #3E2723 10px, #3E2723 20px, 
-                #8B4513 20px, #8B4513 30px
-            );
-            image-rendering: pixelated;
+            background: radial-gradient(circle at 50% 100%, #8B4513, #654321, #3E2723);
         }
         nav {
             position: fixed;
@@ -69,7 +60,6 @@
             padding: 15px 0;
             text-align: center;
             z-index: 1000;
-            image-rendering: pixelated;
         }
         nav a {
             color: white;
