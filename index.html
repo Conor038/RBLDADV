@@ -78,24 +78,41 @@
         }
         .truck {
             position: absolute;
-            width: 60px;
-            height: 30px;
-            background: linear-gradient(to right, #D32F2F, #B71C1C);
+            width: 70px;
+            height: 40px;
+            background: linear-gradient(to right, #4E342E, #3E2723);
             bottom: 130px;
-            clip-path: polygon(5% 60%, 20% 40%, 75% 40%, 90% 60%, 100% 60%, 95% 80%, 5% 80%);
+            clip-path: polygon(0% 80%, 10% 60%, 75% 60%, 90% 80%, 100% 80%, 100% 100%, 0% 100%);
             animation: drivePattern 12s linear infinite;
         }
         .truck::before, .truck::after {
             content: '';
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-color: black;
             border-radius: 50%;
             bottom: -5px;
         }
-        .truck::before { left: 5px; }
-        .truck::after { right: 5px; }
+        .truck::before { left: 8px; }
+        .truck::after { right: 8px; }
+        .truck .cab {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: linear-gradient(to right, #5D4037, #4E342E);
+            top: -15px;
+            left: 10px;
+            clip-path: polygon(0% 100%, 0% 40%, 10% 20%, 70% 20%, 90% 40%, 90% 100%);
+        }
+        .truck .bed {
+            position: absolute;
+            width: 35px;
+            height: 15px;
+            background: #3E2723;
+            top: -5px;
+            left: 35px;
+        }
         @keyframes drivePattern {
             0% { left: 0%; bottom: 130px; }
             15% { left: 20%; bottom: 140px; }
@@ -140,7 +157,11 @@
     <div class="mountains"></div>
     <div class="snow-capped"></div>
     <div class="river"></div>
-    <div class="truck"><div class="headlight"></div></div>
+    <div class="truck">
+        <div class="cab"></div>
+        <div class="bed"></div>
+        <div class="headlight"></div>
+    </div>
     <nav>
         <a href="story.html">Our Story</a>
         <a href="sponsors.html">Sponsors</a>
